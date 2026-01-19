@@ -1,4 +1,5 @@
 #include<iostream>
+#include<climits>
 using namespace std;
 int maxCross(int arr[], int l, int m, int h) {
     int sum = 0, left = INT_MIN;
