@@ -1,0 +1,64 @@
+#include <iostream>
+#include<stack>
+using namespace std;
+int partition(int arr[], int low, int high)
+{
+	int pivot = arr[high];
+	int i = low - 1;
+
+	for (int j = low; j < high; j++)
+	{
+		if (arr[j] <= pivot)
+		{
+			i++;
+			swap(arr[i], arr[j]);
+		}
+	}
+	swap(arr[i + 1], arr[high]);
+	return i + 1;
+}
+void quickSort(int arr[], int n) {
+	stack<int> st;
+
+	st.push(0);
+	st.push(n - 1);
+
+	while (!st.empty()) {
+		int high = st.top();
+		st.pop();
+		int low = st.top();
+		st.pop();
+
+		int p = partition(arr, low, high);
+
+		if (p - 1 > low) {
+			st.push(low);
+			st.push(p - 1);
+		}
+
+		if (p + 1 < high) {
+			st.push(p + 1);
+			st.push(high);
+		}
+	}
+}
+int main()
+{
+	int n;
+	cout << "enter length of an array" << endl;
+	cin >> n;
+	int arr[n];
+	cout << "enter values of array " << endl;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> arr[i];
+	}
+	quickSort(arr, n);
+
+	cout << "Sorted array:\n";
+	for (int i = 0; i < n; i++)
+	{
+		cout << arr[i] << " ";
+	}
+	return 0;
+}
